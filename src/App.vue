@@ -1,60 +1,96 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <v-app-bar
       app
-      color="primary"
+      color="#fdc0b0"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-spacer />
+      <v-toolbar-title class="p-a-5">
+        <Date />
+      </v-toolbar-title>
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <v-container
+        fluid
+      >
+        <v-row
+          align="start"
+          justify="start"
+          class="mb-5"
+        >
+          <v-col><Visual /></v-col>
+          <v-col><Todo /></v-col>
+        </v-row>
+        <v-row
+          align="start"
+          justify="center"
+          class="mt-5"
+        >
+          <v-col><Feelings /></v-col>
+          <v-col><Water /></v-col>
+        </v-row>
+      </v-container>
     </v-content>
+
+    <v-footer
+      color="#fdc0b0"
+      app
+      class="pa-5"
+    >
+      <v-spacer />
+      <span class="time font-weight-bold">{{ moment().format('LT') }}</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import moment from 'moment'
+// import vSelect from 'vue-select'
+import Date from './components/Date'
+import Visual from './components/Visual'
+import Todo from './components/Todo'
+import Water from './components/Water'
+import Feelings from './components/Feelings'
 
-export default {
-  name: 'App',
 
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+  export default {
+    name: 'LayoutsDemosBaselineFlipped',
+    components: {
+      Date,
+      Visual,
+      Todo,
+      Water,
+      Feelings
+    },
+    props: {
+      source: String,
+    },
+    data: () => ({
+    }),
+    methods: {
+      moment: function (date) {
+          return moment(date);
+      }
+    }
+  }
 </script>
+
+<style lang="scss">
+@import "./styles/variables.scss";
+
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-color: $background;
+}
+.v-app-bar {
+  box-shadow: none;
+}
+.time {
+  color:$pinkDark;
+}
+</style>
